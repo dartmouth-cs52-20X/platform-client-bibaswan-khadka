@@ -1,6 +1,7 @@
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const env = process.env.NODE_ENV || 'development';
 // set to 'production' or 'development' in your env
@@ -68,6 +69,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html',
+    }),
+    new ImageminPlugin({
+      disable: false,
+      pngquant: {
+        quality: '95-100',
+      },
     }),
   ],
 };

@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
 import marked from 'marked';
-import { updatePost, fetchPost, deletePost } from '../actions';
+import {
+  errorclear, updatePost, fetchPost, deletePost,
+} from '../actions';
 
 class Post extends Component {
   constructor(props) {
@@ -19,6 +21,10 @@ class Post extends Component {
 
   componentDidMount() {
     this.props.fetchPost(this.props.match.params.postID);
+  }
+
+  componentWillUnmount() {
+    this.props.errorclear();
   }
 
   update= (event) => {
@@ -36,34 +42,12 @@ class Post extends Component {
     this.props.updatePost(post);
   }
 
-  /*  updateTitle= (event) => {
-    console.log(event.target.value);
-    const post = {
-      id: this.props.currentPost.id, title: event.target.value, content: this.props.currentPost.content, coverUrl: this.props.currentPost.coverUrl, tags: this.props.currentPost.tags,
-    };
-    console.log(post);
-    this.props.updatePost(post);
-  }
-
-  updateTags= (event) => {
-    console.log(event.target.value);
-    const post = {
-      id: this.props.currentPost.id, title: this.props.currentPost.title, content: this.props.currentPost.content, coverUrl: this.props.currentPost.coverUrl, tags: event.target.value,
-    };
-    console.log(post);
-    this.props.updatePost(post);
-  }
-
-  updateContent= (event) => {
-    console.log(event.target.value);
-    const post = {
-      id: this.props.currentPost.id, title: this.props.currentPost.title, content: event.target.value, coverUrl: this.props.currentPost.coverUrl, tags: this.props.currentPost.tags,
-    };
-    console.log(post);
-    this.props.updatePost(post);
-  } */
-
   editmodehandler = () => {
+    if (this.props.iserror) {
+      return (
+        <h1>Post Does Not Exist</h1>
+      );
+    }
     if (this.state.isEditing) {
       return (
         <div id="editing">
@@ -99,13 +83,25 @@ class Post extends Component {
       this.props.deletePost(this.props.match.params.postID, this.props.history);
     };
 
-    render() {
-      return (
-        <div id="content">
+    buttonrender= () => {
+      if (this.props.iserror) {
+        return (
+          <h1>Error</h1>
+        );
+      } else {
+        return (
           <div className="buttons">
             <button onClick={this.deleteItem} type="button">Delete</button>
             <button onClick={this.toggleedit} type="button">Edit</button>
           </div>
+        );
+      }
+    }
+
+    render() {
+      return (
+        <div id="content">
+          <this.buttonrender />
           <this.editmodehandler />
         </div>
       );
@@ -115,7 +111,10 @@ class Post extends Component {
 function mapStateToProps(reduxState) {
   return {
     currentPost: reduxState.posts.current,
+    iserror: reduxState.errorcheck.error,
   };
 }
 
-export default connect(mapStateToProps, { updatePost, fetchPost, deletePost })(Post);
+export default connect(mapStateToProps, {
+  errorclear, updatePost, fetchPost, deletePost,
+})(Post);

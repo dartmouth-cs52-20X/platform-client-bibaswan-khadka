@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const ROOT_URL = 'https://platform.cs52.me/api';
-const API_KEY = '?key=Test_Key';
+const API_KEY = '?key=Bibaswan_Khadka';
 
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
@@ -9,6 +9,8 @@ export const ActionTypes = {
   UPDATE_POST: 'UPDATE_POST',
   CREATE_POST: 'CREATE_POST',
   DELETE_POST: 'DELETE_POST',
+  ERROR_SET: 'ERROR_SET',
+  ERROR_CLEAR: 'ERROR_CLEAR',
 };
 
 export function fetchPosts() {
@@ -37,6 +39,12 @@ export function fetchPost(id) {
   };
 }
 
+export function errorclear() {
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ERROR_CLEAR });
+  };
+}
+
 export function createPost(post, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
@@ -44,7 +52,7 @@ export function createPost(post, history) {
       history.push('/');
     })
       .catch((error) => {
-        console.log(error);
+        dispatch({ type: ActionTypes.ERROR_SET, error });
       });
   };
 }
@@ -56,7 +64,7 @@ export function updatePost(post) {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
     })
       .catch((error) => {
-        console.log(error);
+        dispatch({ type: ActionTypes.ERROR_SET, error });
       });
   };
 }

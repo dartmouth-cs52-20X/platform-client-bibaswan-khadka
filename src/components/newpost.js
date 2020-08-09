@@ -12,6 +12,7 @@ class NewPost extends Component {
       Tags: ' ',
       Content: ' ',
       CoverImageURL: ' ',
+      notfilled: false,
     };
   }
 
@@ -22,12 +23,30 @@ class NewPost extends Component {
     this.setState({ [key]: event.target.value });
   }
 
+  reminder = () => {
+    if (this.state.notfilled === true) {
+      return (
+        <div>
+          <p>Please enter Title</p>
+        </div>
+      );
+    } else {
+      return (
+        <p />
+      );
+    }
+  }
+
   createpost = () => {
-    const post = {
-      title: this.state.Title, content: this.state.Content, coverUrl: this.state.CoverImageURL, tags: this.state.Tags,
-    };
-    console.log(post);
-    this.props.createPost(post, this.props.history);
+    if (this.state.Title === ' ') {
+      this.setState({ notfilled: true });
+    } else {
+      const post = {
+        title: this.state.Title, content: this.state.Content, coverUrl: this.state.CoverImageURL, tags: this.state.Tags,
+      };
+      console.log(post);
+      this.props.createPost(post, this.props.history);
+    }
   }
 
   render() {
@@ -46,6 +65,7 @@ class NewPost extends Component {
           <Link to="/"><button type="button">Discard</button></Link>
           <button onClick={this.createpost} type="button">Create</button>
         </div>
+        <this.reminder />
       </form>
     );
   }

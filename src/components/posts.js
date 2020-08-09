@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Card, CardDeck } from 'react-bootstrap';
+import { Card, Carousel } from 'react-bootstrap';
 import { fetchPosts } from '../actions';
 
 class Posts extends Component {
@@ -12,29 +12,26 @@ class Posts extends Component {
   render() {
     const allPostsItems = this.props.allPosts.map((post) => {
       return (
-        <Link key={post.id} to={`posts/${post.id}`}>
-          <Card style={{ width: '18rem' }} className="box">
-            <Card.Img variant="top" src={`${post.coverUrl}`} alt="" />
-            <Card.Body>
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Text>
-                {post.tags}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          {/* <div>
-            <img src={`${post.coverUrl}`} alt="" />
-            <h2>{post.title}</h2>
-            <h2>{post.tags}</h2>
-          </div> */}
-        </Link>
+        <Carousel.Item key={post.id}>
+          <Link key={post.id} to={`posts/${post.id}`}>
+            <Card style={{ width: '40rem' }} className="box container-fluid bg-dark text-white">
+              <Card.Img variant="top" src={`${post.coverUrl}`} alt="" />
+              <Card.Body>
+                <Card.Title>{post.title}</Card.Title>
+                <Card.Text>
+                  {post.tags}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Carousel.Item>
       );
     });
 
     return (
-      <CardDeck>
+      <Carousel>
         { allPostsItems }
-      </CardDeck>
+      </Carousel>
     );
   }
 }

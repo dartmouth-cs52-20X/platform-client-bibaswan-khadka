@@ -1,6 +1,7 @@
 # Redux Platform
 
-For redux platform I used redux and the CRUD api to create a blog/image viewer application that allows you to add, view and search through images and blogs. The platform functions by making api calls through redux actions and uses reducers to set redux state with the post information, which is then used. The platform also uses bootstrap for some styling. 
+For redux platform I used redux and the CRUD api to create a blog/image viewer application that allows you to add, view and search through images and blogs. The platform functions by making api calls through redux actions and uses reducers to set redux state with the post information, which is then used. The platform also uses bootstrap for some styling.  
+[deployed url]( http://bibaswankhadka-cs52-reduxplatform.surge.sh/ )
 
 ## What Worked Well
 I found redux to be very intuitive and fairly easy to understand. The concept of actions, reducers and global state were really easy to understand. Even though it can take some time to set up redux is definately better for larger projects. With just simple react I would have to remember where everything was coming from, but with redux everything was simplified. Since this lab was kind of similar to the react notes lab I was able to use some of the concepts from that lab on this one. 

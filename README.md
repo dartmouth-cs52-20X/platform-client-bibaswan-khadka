@@ -10,6 +10,10 @@ I used bootstrap for some styling and there was definately a learning curve to i
 
 ## Extra Credit
 1.  I made it something other than a blog. I created a image slide viewer. I used bootstrap to create a slider that can be operated with on screen arrows and the keyboard. It still has all the CRUD features. The slider displays images in a carousel.  
+<img src="readme_imgs/slider.png" width="80%" heigh="80%">
 2.  I also handle axios errors and show error on screen. I created a new reducer and new error actions and error states. So now if you try to navigate to a post, edit or delete a post that does not exist it will show error, post does not exist.  
+<img src="readme_imgs/axioserror.png" width="80%" heigh="80%">
 3.  I also added input validation. If you try to create a post without a Title it wont let you, and will ask you to input a title.  
+<img src="readme_imgs/inputvalidation.png" width="80%" heigh="80%">
 4.  I also added a search button to filter posts. I used a plugin called fuse.js to search the posts both by tag and title. Once you input your query and hit search it will show all matching items in order in column view. 
+<img src="readme_imgs/search.png" width="80%" heigh="80%">

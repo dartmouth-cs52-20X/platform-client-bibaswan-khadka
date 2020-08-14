@@ -19,7 +19,10 @@ class Posts extends Component {
               <Card.Body>
                 <Card.Title>{post.title}</Card.Title>
                 <Card.Text>
-                  {post.tags}
+                  {post.tags.join(' ')}
+                </Card.Text>
+                <Card.Text>
+                  Posted- {post.date}
                 </Card.Text>
               </Card.Body>
             </Card>

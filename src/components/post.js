@@ -14,7 +14,7 @@ class Post extends Component {
     this.state = {
       title: ' ',
       content: ' ',
-      tags: ' ',
+      tags: [],
       isEditing: false,
     };
   }
@@ -32,6 +32,13 @@ class Post extends Component {
     const key = `${event.target.name}`;
     // eslint-disable-next-line react/no-unused-state
     this.setState({ [key]: event.target.value });
+  }
+
+  updateTitle= (event) => {
+    // eslint-disable-next-line no-unused-vars
+    const key = `${event.target.name}`;
+    // eslint-disable-next-line react/no-unused-state
+    this.setState({ [key]: event.target.value.split(' ') });
   }
 
   updateServer= () => {
@@ -52,7 +59,7 @@ class Post extends Component {
       return (
         <div id="editing">
           <input name="title" onChange={this.update} value={this.state.title} />
-          <input name="tags" onChange={this.update} value={this.state.tags} />
+          <input name="tags" onChange={this.updateTitle} value={this.state.tags.join(' ')} />
           <TextareaAutosize name="content" onChange={this.update} value={this.state.content} />
         </div>
       );
@@ -60,7 +67,7 @@ class Post extends Component {
       return (
         <div id="notediting">
           <h1>{this.props.currentPost.title}</h1>
-          <h6>{this.props.currentPost.tags}</h6>
+          <h6>{this.props.currentPost.tags && this.props.currentPost.tags.join(' ')}</h6>
           <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.content || '') }} />
         </div>
       );

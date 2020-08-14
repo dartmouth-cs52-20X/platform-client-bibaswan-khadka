@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = 'https://platform.cs52.me/api';
-const API_KEY = '?key=Bibaswan_Khadka';
+const ROOT_URL = 'https://apilab5.herokuapp.com/api';
 
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
@@ -15,7 +14,7 @@ export const ActionTypes = {
 
 export function fetchPosts() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts${API_KEY}`)
+    axios.get(`${ROOT_URL}/posts`)
       .then((response) => {
         dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
         console.log(response.data);
@@ -28,7 +27,7 @@ export function fetchPosts() {
 
 export function fetchPost(id) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`)
+    axios.get(`${ROOT_URL}/posts/${id}`)
       .then((response) => {
         console.log(response.data);
         dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
@@ -47,7 +46,7 @@ export function errorclear() {
 
 export function createPost(post, history) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
+    axios.post(`${ROOT_URL}/posts`, post).then((response) => {
       console.log(response.data);
       history.push('/');
     })
@@ -59,7 +58,7 @@ export function createPost(post, history) {
 
 export function updatePost(post) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${post.id}${API_KEY}`, post).then((response) => {
+    axios.put(`${ROOT_URL}/posts/${post.id}`, post).then((response) => {
       console.log(response.data);
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
     })
@@ -70,7 +69,7 @@ export function updatePost(post) {
 }
 export function deletePost(id, history) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
+    axios.delete(`${ROOT_URL}/posts/${id}`).then((response) => {
       history.push('/');
     })
       .catch((error) => {

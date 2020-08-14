@@ -44,7 +44,7 @@ class SearchPosts extends Component {
             <Card.Body>
               <Card.Title>{post.item.title}</Card.Title>
               <Card.Text>
-                {post.item.tags}
+                {post.item.tags.join(' ')}
               </Card.Text>
             </Card.Body>
           </Card>

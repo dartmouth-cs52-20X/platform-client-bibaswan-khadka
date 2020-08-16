@@ -22,7 +22,7 @@ class Posts extends Component {
                   {post.tags.join(' ')}
                 </Card.Text>
                 <Card.Text>
-                  Posted- {post.date}
+                  Posted- {post.date} by {post.author.username}
                 </Card.Text>
               </Card.Body>
             </Card>

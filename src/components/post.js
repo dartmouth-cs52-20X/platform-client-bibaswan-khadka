@@ -52,7 +52,7 @@ class Post extends Component {
   editmodehandler = () => {
     if (this.props.iserror) {
       return (
-        <h1>Post Does Not Exist</h1>
+        <h1>You may need to login or the post may not exist</h1>
       );
     }
     if (this.state.isEditing) {
